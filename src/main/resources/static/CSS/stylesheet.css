@@ -1,0 +1,60 @@
+#bubble-wrapper {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    bottom: 0px;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.bubble{
+    height: max(300px, 30vw);
+    width: max(300px, 30vw);
+
+    background-color: blue;
+    border-radius: 100%;
+
+    position: absolute;
+    left: 50%;
+    top: 100%;
+
+    animation: wave 2s ease-in-out infinite;
+}
+
+@keyframes wave {
+    from, to{
+        transform: translate(-50%, 0%);
+    }
+    50%{
+        transform: translate(-50%, -20%);
+    }
+}
+
+
+tr:nth-child(even){
+  background:  #d0e1e1
+  ;
+}
+
+thead {
+  background: #1C6EA4;
+  background: -moz-linear-gradient(top, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
+  background: -webkit-linear-gradient(top, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
+  background: linear-gradient(to bottom, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
+  border-bottom: 2px solid #444444;
+  font-family: 'Times New Roman', Times, serif;
+}
+label{
+  font-family: 'Times New Roman', Times, serif;
+  font-size: larger;
+}
+thead th{
+  font-size: 15px;
+  font-weight: bold;
+  color: #FFFFFF;
+  border-left: 2px solid #D0E4F5;
+}
+
+p, option, td, h4{
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}

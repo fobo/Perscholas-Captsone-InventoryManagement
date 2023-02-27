@@ -39,6 +39,7 @@ public class ProductController {
     @GetMapping("/productsAddRemove")
     public String productsAddRemove(Model model, HttpServletRequest request){
 
+        log.warn("Message");
         List<Product> productList = productRepoI.findAll();
         model.addAttribute("products", productList);
 

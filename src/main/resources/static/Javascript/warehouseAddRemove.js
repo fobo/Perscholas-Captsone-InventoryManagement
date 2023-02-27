@@ -1,16 +1,54 @@
 console.log("Loaded JS");
-$(document).ready(function(){document.querySelectorAll('.updateCity').forEach(button => {
-  button.addEventListener('click', event => {
-    // Retrieve the warehouse object from the data attribute
-    const wh = JSON.parse(button.dataset.whJson);
+console.log("jQuery version: " + jQuery.fn.jquery);
 
-    // Retrieve the id value from the data attribute using dot notation
-    const id = button.dataset.whId;
+// $('document').ready(function(){
+//   $('.table .updateCity').on('click', function(event){
 
-    // Do something with the id value
-    console.log(`Clicked "Update" for warehouse ${id} in city ${wh.city}`);
-  });
-});});
+//     event.preventDefault();
+//     var href= $(this).attr('href');
+
+//     console.log(wh);
+//     $.get(href, function(wh, status){
+//       $('#id').val(wh.id);
+//       $('#city').val(wh.city);
+//     });
+
+//     $('#updateModal').modal();
+//   })
+// })
+
+function testDisplay(test) {
+  if (document.getElementById("portests").value == "Hide " + test) {
+      document.getElementById("portests").value = "Show " + test;
+      var table= document.getElementById("testing");
+      for (var i = 0, row; row = table.rows[i]; i++) {
+      if(row.className == "test"){row.style.visibility="hidden";}
+      }
+  }
+  else{
+      document.getElementById("portests").value = "Hide " + test;
+      var table= document.getElementById("testing");
+      for (var i = 0, row; row = table.rows[i]; i++) {
+      if(row.className == "test"){row.style.visibility='visible';}
+      }
+  }
+}
+
+
+
+
+// $(document).ready(function(){document.querySelectorAll('.updateCity').forEach(button => {
+//   button.addEventListener('click', event => {
+//     // Retrieve the warehouse object from the data attribute
+//     const wh = JSON.parse(button.dataset.whJson);
+
+//     // Retrieve the id value from the data attribute using dot notation
+//     const id = button.dataset.whId;
+
+//     // Do something with the id value
+//     console.log(`Clicked "Update" for warehouse ${id} in city ${wh.city}`);
+//   });
+// });});
 
 // $(document).ready(function () {console.log("Loaded ready");
 // $('.updateCity').off().on('click', function(e) {

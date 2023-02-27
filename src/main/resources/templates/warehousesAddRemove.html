@@ -35,7 +35,7 @@
         <table class="table">
           <thead>
             <tr>
-              <th>Id</th>
+              <th>Warehouse Identifier</th>
               <th>City</th>
               <th>Update</th>
               <th>Delete</th>
@@ -50,22 +50,26 @@
                   <!-- <a th:href="@{/warehousesAddRemove/getRecord/(Id=${wh.id})}" class="btn btn-info updateCity">
                     Update
                   </a> -->
-                  <button onclick="toggle(this)">Update</button>
+                  <button onClick="myfunction(this.data-value)" th:data-value="${wh.id}" class="btn btn-info">Update</button>
                 </td>
                 <td>
-                  <button type="button" class="btn btn-danger delete">
+                  <button type="button" class="btn btn-danger deleteAction">
                     Delete
                   </button>
 
                 </td>
               </tr>
-              <tr hidden id="hiderow">
+              <tr hidden th:id="${wh.id}">
                 <td>
-                  <input type="text" name="id" id="id" th:value="${wh.id}" />
+                  <input type="text" name="id" id="id" disabled th:value="${wh.id}" class="form-control"/>
                 </td>
                 <td>
-                  <input type="text" name="city" id="city" th:value="${wh.city}" />
+                  <input type="text" name="city" id="city" th:value="${wh.city}" class="form-control"/>
                 </td>
+                <td>
+                  <button class="btn btn-warning saveAction">Save</button>
+                </td>
+                <td></td>
               </tr>
             </th:block>
           </tbody>
@@ -85,18 +89,23 @@
   </div>
 </body>
 <script>
-  let toggle = button => {
-    let element = document.getElementById("hiderow");
-    let hidden = element.getAttribute("hidden");
+// function myfunction(id) {
+//   console.log("Id clicked:" + id);
+//   let element = document.getElementById(id);
+//   console.log("element clicked:" + element);
+//   let hidden = element.getAttribute("hidden");
+//   console.log("hidden clicked:" + hidden);
+//   if (!hidden) {
+//     element.setAttribute("hidden", "hidden");
+//   } else {
+//     element.removeAttribute("hidden");
+//   }
+// }
 
-    if (!hidden) {
-      element.setAttribute("hidden", "hidden");
-      button.innerText = "Show tr";
-    } else {
-      element.removeAttribute("hidden");
-      button.innerText = "Hide tr";
-    }
-  }
+
 </script>
 
 </html>
+
+
+

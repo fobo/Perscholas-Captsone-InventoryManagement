@@ -17,22 +17,21 @@ console.log("jQuery version: " + jQuery.fn.jquery);
 //   })
 // })
 
-function testDisplay(test) {
-  if (document.getElementById("portests").value == "Hide " + test) {
-      document.getElementById("portests").value = "Show " + test;
-      var table= document.getElementById("testing");
-      for (var i = 0, row; row = table.rows[i]; i++) {
-      if(row.className == "test"){row.style.visibility="hidden";}
-      }
-  }
-  else{
-      document.getElementById("portests").value = "Hide " + test;
-      var table= document.getElementById("testing");
-      for (var i = 0, row; row = table.rows[i]; i++) {
-      if(row.className == "test"){row.style.visibility='visible';}
-      }
-  }
-}
+$(document).ready(function() {
+  $("button").click(function() {
+    let id = $(this).data("value");
+    console.log("Id clicked: " + id);
+    let element = $('#' + id);
+    console.log("element clicked:" + element);
+    let hidden = element.attr("hidden");
+    console.log("hidden clicked:" + hidden);
+    if (!hidden) {
+      element.attr("hidden", "hidden");
+    } else {
+      element.removeAttr("hidden");
+    }
+  });
+});
 
 
 

@@ -29,7 +29,6 @@ public class WarehouseController {
     }
     @GetMapping("/warehousesAddRemove")
     public String warehousesAddRemove(Model model){
-        log.warn("Warhouses add remove message");
         List<Warehouse> warehouseList = warehouseRepoI.findAll();
         model.addAttribute("warehouses", warehouseList);
         return "warehousesAddRemove";
@@ -50,12 +49,23 @@ public class WarehouseController {
         model.addAttribute("warehouses", warehouseList);
         return "warehousesAddRemove";
     }
+    @PostMapping("/updateWarehouseCity")
+    public String updateWarehouseCity(@RequestParam(name = "city") String city, @RequestParam(name="id") Integer id, Model model){
+        warehouseService.updateWarehouse(id, city);
+
+        //Returns updated list
+        List<Warehouse> warehouseList = warehouseRepoI.findByCompanyId(id); // Fix this weird update
+        model.addAttribute("warehouses", warehouseList);
+        return "warehousesAddRemove";
+    }
 //    @GetMapping("/getRecord/{id}")
 //    public String getRecord(@PathVariable("id")int id, Model model){
 //        log.warn(String.valueOf(id));
 //        model.addAttribute("record",warehouseService.getRecord(id));
 //        return "warehousesAddRemove";
 //    }
+
+
 
     @RequestMapping("/getRecord")
     @ResponseBody

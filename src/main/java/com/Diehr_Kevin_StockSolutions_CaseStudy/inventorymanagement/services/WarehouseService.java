@@ -24,4 +24,12 @@ public class WarehouseService {
     public Optional<Warehouse> getRecord(Integer id){
         return warehouseRepoI.findById(id);
     }
+
+    public void updateWarehouse(Integer id, String city){
+        Optional<Warehouse> warehouse = warehouseRepoI.findById(id);
+        Warehouse warehouse2;
+        warehouse2 = warehouse.get();
+        warehouse2.setCity(city);
+        warehouseRepoI.saveAndFlush(warehouse2);
+    }
 }

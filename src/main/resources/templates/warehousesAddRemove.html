@@ -32,6 +32,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-6">
+        
         <table class="table">
           <thead>
             <tr>
@@ -47,9 +48,6 @@
                 <td th:text="${wh.id}" />
                 <td th:text="${wh.city}" />
                 <td>
-                  <!-- <a th:href="@{/warehousesAddRemove/getRecord/(Id=${wh.id})}" class="btn btn-info updateCity">
-                    Update
-                  </a> -->
                   <button onClick="myfunction(this.data-value)" th:data-value="${wh.id}" class="btn btn-info">Update</button>
                 </td>
                 <td>
@@ -60,14 +58,15 @@
                 </td>
               </tr>
               <tr hidden th:id="${wh.id}">
+                <form action="/updateWarehouseCity" method="post" th:id="'form' + ${wh.id}"></form>
                 <td>
-                  <input type="text" name="id" id="id" disabled th:value="${wh.id}" class="form-control"/>
+                  <input type="text" name="id" id="id" th:value="${wh.id}" th:form="'form' + ${wh.id}" class="form-control"/>
                 </td>
                 <td>
-                  <input type="text" name="city" id="city" th:value="${wh.city}" class="form-control"/>
+                  <input type="text"  name="city" id="city" th:value="${wh.city}" th:form="'form' + ${wh.id}" class="form-control"/>
                 </td>
                 <td>
-                  <button class="btn btn-warning saveAction">Save</button>
+                  <button class="btn btn-warning saveAction" type="submit" th:form="'form' + ${wh.id}">Save</button>
                 </td>
                 <td></td>
               </tr>

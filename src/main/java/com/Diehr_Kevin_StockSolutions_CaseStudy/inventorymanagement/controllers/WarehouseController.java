@@ -34,6 +34,12 @@ public class WarehouseController {
         return "warehousesAddRemove";
     }
 
+    @GetMapping("addWarehouseForm")
+    public String addWarehouse(){
+
+        return "addWarehouseForm";
+    }
+
     @PostMapping("/warehousesAddRemove")
     public String handleFormSubmission(@RequestParam(name = "id") Integer id, Model model){
 
@@ -50,11 +56,13 @@ public class WarehouseController {
         return "warehousesAddRemove";
     }
     @PostMapping("/updateWarehouseCity")
-    public String updateWarehouseCity(@RequestParam(name = "city") String city, @RequestParam(name="id") Integer id, Model model){
+    public String updateWarehouseCity(@RequestParam(name = "city") String city, @RequestParam(name="id") Integer id, @RequestParam(name="company_id") Integer company_id, Model model){
         warehouseService.updateWarehouse(id, city);
 
         //Returns updated list
-        List<Warehouse> warehouseList = warehouseRepoI.findByCompanyId(id); // Fix this weird update
+        //This portion is supposed to update the list.
+        //New method: Send company_id to front end to pull so the update returns the right list.
+        List<Warehouse> warehouseList = warehouseRepoI.findByCompanyId(company_id); // Fix this weird update
         model.addAttribute("warehouses", warehouseList);
         return "warehousesAddRemove";
     }
@@ -65,7 +73,17 @@ public class WarehouseController {
 //        return "warehousesAddRemove";
 //    }
 
+    @PostMapping("/addWarehouse")
+    public String addWarehouse(@RequestParam(name = "city") String city, @RequestParam(name="company_id") Integer id){
+        //request name of city and company_id from front end
+        //get company object from query
+        // create new object using params city, company
+        log.warn(city + " " + id);
+        warehouseService.addWarehouse(id, city);
 
+
+        return "warehousesAddRemove";
+    }
 
     @RequestMapping("/getRecord")
     @ResponseBody

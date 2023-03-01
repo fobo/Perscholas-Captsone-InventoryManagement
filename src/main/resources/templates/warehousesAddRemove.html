@@ -68,7 +68,9 @@
                 <td>
                   <button class="btn btn-warning saveAction" type="submit" th:form="'form' + ${wh.id}">Save</button>
                 </td>
-                <td></td>
+                <td>
+                  <input  hidden name="company_id" id="company_id" th:value="${wh.company.id}" th:form="'form' + ${wh.id}" type="text" class="form-control"/>
+                </td>
               </tr>
             </th:block>
           </tbody>
@@ -86,23 +88,10 @@
       </div>
     </div>
   </div>
+
+  <a th:href="@{/addWarehouseForm}">Go to add warehouses</a>
 </body>
-<script>
-// function myfunction(id) {
-//   console.log("Id clicked:" + id);
-//   let element = document.getElementById(id);
-//   console.log("element clicked:" + element);
-//   let hidden = element.getAttribute("hidden");
-//   console.log("hidden clicked:" + hidden);
-//   if (!hidden) {
-//     element.setAttribute("hidden", "hidden");
-//   } else {
-//     element.removeAttribute("hidden");
-//   }
-// }
 
-
-</script>
 
 </html>
 

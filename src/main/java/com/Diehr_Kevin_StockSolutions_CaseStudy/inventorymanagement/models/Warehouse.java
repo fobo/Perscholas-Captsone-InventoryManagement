@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.util.Objects;
 
+
 @Entity
 @Table(name = "warehouses")
 public class Warehouse {
@@ -14,6 +15,16 @@ public class Warehouse {
 
     @Column(name = "city", nullable = false, length = 45)
     private String city;
+
+    public Warehouse() {
+    }
+
+    public Warehouse(String city, Company company) { //add warehouse
+        this.city = city;
+        this.company = company;
+    }
+
+
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "company_id", nullable = false)

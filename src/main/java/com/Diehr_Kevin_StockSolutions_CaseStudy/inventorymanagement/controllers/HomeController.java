@@ -41,7 +41,7 @@ public class HomeController {
     }
 
 
-    @GetMapping({"/","/aboutus/{id}"})
+    @GetMapping({"/aboutus/{id}"})
     public String aboutus(@PathVariable(name = "id", required = false) int id, Model model, HttpServletRequest request){
 
 
@@ -60,5 +60,11 @@ public class HomeController {
         }
         model.addAttribute("allUser", users);
         return "aboutus";
+    }
+
+    @GetMapping({"/","login"})
+    public String loginPage(){
+
+        return "login";
     }
 }

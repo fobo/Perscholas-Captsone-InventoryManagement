@@ -39,6 +39,7 @@ public class WarehouseService {
     }
 
     public void addWarehouse(Integer id, String city){
+        //TODO Fix update method
         System.out.println(id + " " + city);
         Optional<Company> company = companyRepoI.findById(id);
         System.out.println("company "+company);

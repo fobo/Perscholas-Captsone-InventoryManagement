@@ -20,9 +20,9 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
-    @Column(name = "email", nullable = false, length = 45)
+    @Column(name = "email", nullable = false, length = 100)
     private String email;
-    @Column(name = "password", nullable = false, length = 45)
+    @Column(name = "password", nullable = false, length = 100)
     private String password;
     @Column(name = "first_name", nullable = false)
     private String first_name;

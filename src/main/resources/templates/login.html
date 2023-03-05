@@ -31,12 +31,12 @@
                   <h4 class="mt-1 mb-5 pb-1">Stock Solutions</h4>
                 </div>
 
-                <form id="login-form">
+                <form id="login-form" method="post" th:action="@{/login/processing}">
                   <p>Please login to your account</p>
 
                   <div class="form-outline mb-4">
-                    <input name="username" type="email" id="form2Example11" class="form-control"
-                      placeholder="Phone number or email address" />
+                    <input name="email" type="email" id="form2Example11" class="form-control"
+                      placeholder="Email Address" />
                     <label class="form-label" for="form2Example11">Username</label>
                   </div>
 
@@ -58,6 +58,7 @@
                   <div class="d-flex align-items-center justify-content-center pb-4">
                     <a href="aboutus.html" class="mb-0 me-2">Register</a>
                   </div>
+                  <span th:if="${param.error}" th:text="${'invalid username or password'}" class="error text-warning text-danger"></span>
                 </form>
 
               </div>

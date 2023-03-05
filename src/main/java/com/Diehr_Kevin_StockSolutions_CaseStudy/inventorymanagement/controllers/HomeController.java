@@ -62,9 +62,14 @@ public class HomeController {
         return "aboutus";
     }
 
-    @GetMapping({"/","login"})
-    public String loginPage(){
+    @GetMapping({"/login"})
+    public String login(){
 
         return "login";
+    }
+
+    @GetMapping(value = {"/"})
+    public String gotoPage(){
+        return "warehousesAddRemove";
     }
 }

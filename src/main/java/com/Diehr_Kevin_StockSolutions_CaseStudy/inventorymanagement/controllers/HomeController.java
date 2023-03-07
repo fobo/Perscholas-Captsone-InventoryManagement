@@ -23,7 +23,7 @@ import java.util.Optional;
 
 @Controller
 @Slf4j
-@SessionAttributes(value = {"msg"})
+@SessionAttributes(value = {"user_id"})
 public class HomeController {
 
     UserRepoI userRepoI;
@@ -41,35 +41,37 @@ public class HomeController {
     }
 
 
-    @GetMapping({"/aboutus/{id}"})
-    public String aboutus(@PathVariable(name = "id", required = false) int id, Model model, HttpServletRequest request){
-
-
-        List<User> users;
-        if (id == 0) {
-            // If the id is not provided in the URL, retrieve all users
-            users = userRepoI.findAll();
-        } else {
-            // If an id is provided, retrieve the user with that id
-            Optional<User> user = userRepoI.findById(id);
-            if (user.isPresent()) {
-                users = Collections.singletonList(user.get());
-            } else {
-                users = Collections.emptyList();
-            }
-        }
-        model.addAttribute("allUser", users);
-        return "aboutus";
-    }
+//    @GetMapping({"/aboutus/{id}"})
+//    public String aboutus(@PathVariable(name = "id", required = false) int id, Model model, HttpServletRequest request){
+//
+//
+//        List<User> users;
+//        if (id == 0) {
+//            // If the id is not provided in the URL, retrieve all users
+//            users = userRepoI.findAll();
+//        } else {
+//            // If an id is provided, retrieve the user with that id
+//            Optional<User> user = userRepoI.findById(id);
+//            if (user.isPresent()) {
+//                users = Collections.singletonList(user.get());
+//            } else {
+//                users = Collections.emptyList();
+//            }
+//        }
+//        model.addAttribute("allUser", users);
+//        return "aboutus";
+//    }
 
     @GetMapping({"/login"})
     public String login(){
 
         return "login";
     }
+    @GetMapping({"/login/processing"})
+    public String redirect(){
 
-    @GetMapping(value = {"/"})
-    public String gotoPage(){
         return "warehousesAddRemove";
     }
+
+
 }

@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.LinkedHashSet;
 import java.util.Objects;
@@ -31,6 +32,14 @@ public class User {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "company_id")
     private Company company;
+
+    public User(String email, String password, String first_name, String last_name, Company company) {
+        this.email = email;
+        this.password = setPassword(password);
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.company = company;
+    }
 
     @Override
     public String toString() {
@@ -87,8 +96,9 @@ public class User {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public String setPassword(String password) {
+        return new BCryptPasswordEncoder().encode(password);
+
     }
 
     public Company getCompany() {

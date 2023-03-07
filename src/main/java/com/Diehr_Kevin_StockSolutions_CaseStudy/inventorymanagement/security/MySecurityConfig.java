@@ -41,6 +41,8 @@ public class MySecurityConfig {
 
         http.csrf().disable()
                 .authorizeRequests()
+                .requestMatchers("/","index","css/**","javascript/**").permitAll()
+                .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")

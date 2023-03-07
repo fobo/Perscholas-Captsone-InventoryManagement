@@ -25,7 +25,7 @@ public class Product {
     private String productDescription;
 
     @Column(name = "quantity", nullable = false, length = 45)
-    private String quantity;
+    private Integer quantity;
 
     public Integer getId() {
         return id;
@@ -67,12 +67,22 @@ public class Product {
         this.productDescription = productDescription;
     }
 
-    public String getQuantity() {
+    public Integer getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(String quantity) {
+    public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
 
+    public Product(Warehouse warehouse, Company company, String productName, String productDescription, Integer quantity) {
+        this.warehouse = warehouse;
+        this.company = company;
+        this.productName = productName;
+        this.productDescription = productDescription;
+        this.quantity = quantity;
+    }
+
+    public Product() {
+    }
 }

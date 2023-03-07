@@ -4,6 +4,9 @@ import com.Diehr_Kevin_StockSolutions_CaseStudy.inventorymanagement.dao.ProductR
 import com.Diehr_Kevin_StockSolutions_CaseStudy.inventorymanagement.dao.WarehouseRepoI;
 import com.Diehr_Kevin_StockSolutions_CaseStudy.inventorymanagement.models.Product;
 import com.Diehr_Kevin_StockSolutions_CaseStudy.inventorymanagement.models.Warehouse;
+import com.Diehr_Kevin_StockSolutions_CaseStudy.inventorymanagement.services.CompanyService;
+import com.Diehr_Kevin_StockSolutions_CaseStudy.inventorymanagement.services.ProductService;
+import com.Diehr_Kevin_StockSolutions_CaseStudy.inventorymanagement.services.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.security.Principal;
 import java.util.List;
 
 @Slf4j
@@ -22,6 +26,12 @@ public class ProductController {
     WarehouseRepoI warehouseRepoI;
     ProductRepoI productRepoI;
 
+    @Autowired
+    UserService userService;
+    @Autowired
+    CompanyService companyService;
+    @Autowired
+    ProductService productService;
     @Autowired
     public ProductController(WarehouseRepoI warehouseRepoI, ProductRepoI productRepoI) {
         this.warehouseRepoI = warehouseRepoI;
@@ -37,12 +47,24 @@ public class ProductController {
     }
 
     @GetMapping("/productsAddRemove")
-    public String productsAddRemove(Model model, HttpServletRequest request){
-
-        log.warn("Message");
-        List<Product> productList = productRepoI.findAll();
+    public String productsAddRemove(Model model, Principal principal){
+        String email = principal.getName();
+        Integer userId = userService.findId(email);
+        Integer companyId = companyService.findId(userId);
+        List<Product> productList = productService.getProducts(companyId);
         model.addAttribute("products", productList);
 
+        return "productsAddRemove";
+    }
+
+    @PostMapping("/updateProduct")
+    public String updateProduct(@RequestParam(name = "id") Integer id, @RequestParam(name = "productName") String productName, @RequestParam(name = "productDescription") String productDescription, @RequestParam(name = "quantity") Integer quantity, Principal principal, Model model){
+        productService.updateProduct(id, productName, productDescription, quantity);
+        String email = principal.getName();
+        Integer userId = userService.findId(email);
+        Integer companyId = companyService.findId(userId);
+        List<Product> productList = productService.getProducts(companyId);
+        model.addAttribute("products", productList);
         return "productsAddRemove";
     }
 }

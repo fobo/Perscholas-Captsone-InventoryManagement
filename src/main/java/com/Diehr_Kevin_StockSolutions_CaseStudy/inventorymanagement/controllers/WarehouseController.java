@@ -1,8 +1,13 @@
 package com.Diehr_Kevin_StockSolutions_CaseStudy.inventorymanagement.controllers;
 
 import com.Diehr_Kevin_StockSolutions_CaseStudy.inventorymanagement.dao.CompanyRepoI;
+import com.Diehr_Kevin_StockSolutions_CaseStudy.inventorymanagement.dao.UserRepoI;
 import com.Diehr_Kevin_StockSolutions_CaseStudy.inventorymanagement.dao.WarehouseRepoI;
+import com.Diehr_Kevin_StockSolutions_CaseStudy.inventorymanagement.models.Company;
+import com.Diehr_Kevin_StockSolutions_CaseStudy.inventorymanagement.models.User;
 import com.Diehr_Kevin_StockSolutions_CaseStudy.inventorymanagement.models.Warehouse;
+import com.Diehr_Kevin_StockSolutions_CaseStudy.inventorymanagement.services.CompanyService;
+import com.Diehr_Kevin_StockSolutions_CaseStudy.inventorymanagement.services.UserService;
 import com.Diehr_Kevin_StockSolutions_CaseStudy.inventorymanagement.services.WarehouseService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
@@ -11,25 +16,47 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
 @Slf4j
 @Controller
 public class WarehouseController {
+    private final UserRepoI userRepoI;
 
+    @Autowired
     CompanyRepoI companyRepoI;
     WarehouseRepoI warehouseRepoI;
     WarehouseService warehouseService;
+
     @Autowired
-    public WarehouseController(CompanyRepoI companyRepoI, WarehouseRepoI warehouseRepoI, WarehouseService warehouseService) {
+    UserService userService;
+    @Autowired
+    CompanyService companyService;
+
+    @Autowired
+    public WarehouseController(UserRepoI userRepoI, CompanyRepoI companyRepoI, WarehouseRepoI warehouseRepoI, WarehouseService warehouseService) {
+        this.userRepoI = userRepoI;
         this.companyRepoI = companyRepoI;
         this.warehouseRepoI = warehouseRepoI;
         this.warehouseService = warehouseService;
     }
+
     @GetMapping("/warehousesAddRemove")
-    public String warehousesAddRemove(Model model){
-        List<Warehouse> warehouseList = warehouseRepoI.findAll();
+    public String warehousesAddRemove(Model model,Principal principal){
+
+        /*
+        Get email from principal
+        get user id from email match
+        get company id from user id match (get company id from email match?)
+        get list of companies from company id match
+         */
+        String email = principal.getName();
+
+        Integer userId = userService.findId(email);
+        Integer companyId = companyService.findId(userId);
+        List<Warehouse> warehouseList = warehouseService.getWarehouses(companyId);
         model.addAttribute("warehouses", warehouseList);
         return "warehousesAddRemove";
     }
@@ -41,8 +68,8 @@ public class WarehouseController {
     }
 
     @PostMapping("/warehousesAddRemove")
-    public String handleFormSubmission(@RequestParam(name = "id") Integer id, Model model){
-
+    public String handleFormSubmission(@RequestParam(name = "id") Integer id, Model model, Principal principal){
+        log.info(principal.getName());
         List<Warehouse> warehouseList = warehouseRepoI.findByCompanyId(id);
         model.addAttribute("warehouses", warehouseList);
         return "warehousesAddRemove";

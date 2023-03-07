@@ -40,13 +40,16 @@ public class WarehouseService {
 
     public void addWarehouse(Integer id, String city){
         //TODO Fix update method
-        System.out.println(id + " " + city);
         Optional<Company> company = companyRepoI.findById(id);
-        System.out.println("company "+company);
         Company company2 = company.get();
-        System.out.println("company2" + company2);
         Warehouse warehouse = new Warehouse(city, company2);
-        System.out.println("warehouse "+warehouse);
         warehouseRepoI.saveAndFlush(warehouse);
+    }
+
+    public List<Warehouse> getWarehouses(Integer companyId){
+        List<Warehouse> warehouseList = warehouseRepoI.findByCompanyId(companyId);
+
+        return warehouseList;
+
     }
 }

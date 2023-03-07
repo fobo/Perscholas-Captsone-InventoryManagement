@@ -60,7 +60,7 @@
               <tr hidden th:id="${wh.id}">
                 <form action="/updateWarehouseCity" method="post" th:id="'form' + ${wh.id}"></form>
                 <td>
-                  <input type="text" name="id" id="id" th:value="${wh.id}" th:form="'form' + ${wh.id}" class="form-control"/>
+                  <input type="text" name="id" id="id" th:value="${wh.id}" th:form="'form' + ${wh.id}" class="form-control" hidden/>
                 </td>
                 <td>
                   <input type="text"  name="city" id="city" th:value="${wh.city}" th:form="'form' + ${wh.id}" class="form-control"/>

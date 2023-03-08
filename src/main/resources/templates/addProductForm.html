@@ -35,15 +35,6 @@
   </head>
   <body>
     <div th:replace="~{fragments/fragment.html :: nav}"></div>
-    <pre>
-    Id (Auto Generated)
-    Product Name --Normal Input Text 
-    Product Description -- Big text box Text
-    Quantity -- Small input # 
-    Associated Warehouse -- Small Input # 
-    Associated Comapny (Pulled from Principal)
-</pre
-    >
     <form method="post" action="/addProduct">
       <div class="container">
         <div class="row form-outline mb-4">
@@ -89,5 +80,6 @@
         <div class="row"><button class="btn btn-primary">Save</button></div>
       </div>
     </form>
+    <div th:replace="~{fragments/fragment.html :: footer}"></div>
   </body>
 </html>

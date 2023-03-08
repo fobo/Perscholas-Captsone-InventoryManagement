@@ -68,11 +68,9 @@
                   <td>
                     <button onClick="myfunction(this.data-value)" th:data-value="${p.id}" class="btn btn-info">Update</button>
                   </td>
-                  <td>
-                    <button type="button" class="btn btn-danger deleteProduct">
-                      Delete
-                    </button>
-                  </td>
+                  <form action="/deleteProduct" method="post" th:id="'formDelete' + ${p.id}"></form>
+                  <td><input type="hidden" name="id" id="id" th:value="${p.id}" th:form="'formDelete' + ${p.id}" class="form-control"></td>
+                  <td><button type="submit" th:form="'formDelete' + ${p.id}" class="btn btn-danger deleteProduct">Delete</button></td>
                 </tr>
                 <tr hidden th:id="${p.id}">
                     <form action="/updateProduct" method="post" th:id="'form' + ${p.id}">

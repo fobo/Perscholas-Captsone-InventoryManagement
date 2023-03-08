@@ -67,4 +67,34 @@ public class ProductController {
         model.addAttribute("products", productList);
         return "productsAddRemove";
     }
+
+    @PostMapping("/deleteProduct")
+    public String deleteProduct(@RequestParam(name = "id") Integer id, Model model, Principal principal){
+        productService.deleteProduct(id);
+        String email = principal.getName();
+        Integer userId = userService.findId(email);
+        Integer companyId = companyService.findId(userId);
+        List<Product> productList = productService.getProducts(companyId);
+        model.addAttribute("products", productList);
+        return "productsAddRemove";
+    }
+
+    @GetMapping("/addProductForm")
+    public String addProductForm(){
+
+        return "addProductForm";
+    }
+
+    @PostMapping("/addProduct")
+    public String addProduct(@RequestParam(name = "warehouse_id") Integer warehouse_id, @RequestParam(name = "productName") String productName, @RequestParam(name = "productDescription") String productDescription, @RequestParam(name = "quantity") Integer quantity, Principal principal, Model model){
+       log.warn("ENTERING ADD PRODUCT");
+
+        String email = principal.getName();
+       Integer userId = userService.findId(email);
+        productService.addProduct(userId, warehouse_id, productName, productDescription, quantity);
+        Integer companyId = companyService.findId(userId);
+        List<Product> productList = productService.getProducts(companyId);
+        model.addAttribute("products", productList);
+        return "productsAddRemove";
+    }
 }

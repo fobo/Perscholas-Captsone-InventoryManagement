@@ -33,6 +33,7 @@
     <link rel="stylesheet" th:href="@{/css/stylesheet.css}" />
   </head>
   <body>
+    <div th:replace="~{fragments/fragment.html :: nav}"></div>
     <form method="post" action="/productsAddRemove">
       <label for="id">Company ID:</label>
       <input type="text" name="id" id="id" required />

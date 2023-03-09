@@ -8,6 +8,7 @@ import com.Diehr_Kevin_StockSolutions_CaseStudy.inventorymanagement.models.Compa
 import com.Diehr_Kevin_StockSolutions_CaseStudy.inventorymanagement.models.User;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,7 @@ import java.util.Optional;
 
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @Service
+@Slf4j
 public class UserService {
 
     @Autowired
@@ -34,14 +36,15 @@ public class UserService {
     public void addUser(Integer company_id, String email, String password, String firstName, String lastName) {
 
         Optional<Company> company = companyRepoI.findById(company_id);
-        Company company2 = company.get();
-        User user = new User(email, password, firstName, lastName, company2);
+        Company setCompany = company.get();
+        User user = new User(email, password, firstName, lastName, setCompany);
         userRepoI.saveAndFlush(user);
-
+        log.warn("Adding user");
         //adds user to authgroup.
         AuthGroup authUser = new AuthGroup(email,"USER");
         authGroupRepoI.saveAndFlush(authUser);
 
+        log.warn("Adding user to Auth Group");
 
     }
 

@@ -58,7 +58,12 @@ public class ProductController {
     }
 
     @PostMapping("/updateProduct")
-    public String updateProduct(@RequestParam(name = "id") Integer id, @RequestParam(name = "productName") String productName, @RequestParam(name = "productDescription") String productDescription, @RequestParam(name = "quantity") Integer quantity, Principal principal, Model model){
+    public String updateProduct(@RequestParam(name = "id") Integer id,
+                                @RequestParam(name = "productName") String productName,
+                                @RequestParam(name = "productDescription") String productDescription,
+                                @RequestParam(name = "quantity") Integer quantity,
+                                Principal principal,
+                                Model model){
         productService.updateProduct(id, productName, productDescription, quantity);
         String email = principal.getName();
         Integer userId = userService.findId(email);

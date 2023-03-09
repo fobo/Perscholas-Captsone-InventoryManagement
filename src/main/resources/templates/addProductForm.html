@@ -1,85 +1,51 @@
 <!DOCTYPE html>
-<html
-  lang="en"
-  xmlns:th="http://www.thymeleaf.org"
-  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
->
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-      crossorigin="anonymous"
-    />
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-      integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
-      crossorigin="anonymous"
-    />
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"
-      integrity="sha384-cU6e7l8yvJrOQQ+YyjUQ24N1z13Z4LG4sOMcLJkm2QgsE18/IXPjT7p/4/SRLGMJ"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
-      integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
-      crossorigin="anonymous"
-    ></script>
-    <title>Add Product</title>
-  </head>
-  <body>
-    <div th:replace="~{fragments/fragment.html :: nav}"></div>
-    <form method="post" action="/addProduct">
-      <div class="container">
-        <div class="row form-outline mb-4">
-          <label for="productName" class="form-label">Product Name</label>
-          <input
-            type="text"
-            name="productName"
-            class="form-control"
-            placeholder="Product Name"
-          />
-        </div>
-        <div class="row form-outline mb-4">
-          <label for="productDescription" class="form-label">Description</label>
-          <textarea
-            name="productDescription"
-            class="form-control"
-            placeholder="Product Description"
-            rows="5"
-          ></textarea>
-        </div>
-        <div class="row form-outline mb-4">
-          <div class="col">
-            <label for="Quantity" class="form-label">Product Quantity</label>
-            <input
-              type="text"
-              name="quantity"
-              class="form-control"
-              placeholder="Quantity"
-            />
-          </div>
-          <div class="col">
-            <label for="Warehouse" class="form-label"
-              >Warehouse Identifier</label
-            >
-            <input
-              type="text"
-              name="warehouse_id"
-              class="form-control"
-              placeholder="Id"
-            />
-          </div>
-        </div>
-        <div class="row"><button class="btn btn-primary">Save</button></div>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous" />
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"
+    integrity="sha384-cU6e7l8yvJrOQQ+YyjUQ24N1z13Z4LG4sOMcLJkm2QgsE18/IXPjT7p/4/SRLGMJ"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+    integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+    crossorigin="anonymous"></script>
+  <title>Add Product</title>
+</head>
+
+<body>
+  <div th:replace="~{fragments/fragment.html :: nav}"></div>
+  <form method="post" action="/addProduct">
+    <div class="container">
+      <div class="row form-outline mb-4">
+        <label for="productName" class="form-label">Product Name</label>
+        <input type="text" name="productName" class="form-control" placeholder="Product Name" />
       </div>
-    </form>
-    <div th:replace="~{fragments/fragment.html :: footer}"></div>
-  </body>
+      <div class="row form-outline mb-4">
+        <label for="productDescription" class="form-label">Description</label>
+        <textarea name="productDescription" class="form-control" placeholder="Product Description" rows="5"></textarea>
+      </div>
+      <div class="row form-outline mb-4">
+        <div class="col">
+          <label for="Quantity" class="form-label">Product Quantity</label>
+          <input type="text" name="quantity" class="form-control" placeholder="Quantity" />
+        </div>
+        <div class="col">
+          <label for="Warehouse" class="form-label">Warehouse Identifier</label>
+          <input type="text" name="warehouse_id" class="form-control" placeholder="Id" />
+        </div>
+      </div>
+      <div class="row"><button class="btn btn-primary">Save</button></div>
+    </div>
+  </form>
+  <div th:replace="~{fragments/fragment.html :: footer}"></div>
+</body>
+
 </html>

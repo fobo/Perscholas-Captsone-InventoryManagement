@@ -46,6 +46,7 @@ public class WarehouseService {
         warehouseRepoI.saveAndFlush(warehouse);
     }
 
+    //Used for warehouse update and remove, and for product designation redesign
     public List<Warehouse> getWarehouses(Integer companyId){
         List<Warehouse> warehouseList = warehouseRepoI.findByCompanyId(companyId);
 

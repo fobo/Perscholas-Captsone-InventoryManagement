@@ -20,6 +20,7 @@ public class UserController {
     //TODO Add user to database
     //TODO Improve login form frontend
     UserRepoI userRepoI;
+    @Autowired
     UserService userService;
     MySecurityConfig mySecurityConfig;
 
@@ -36,8 +37,12 @@ public class UserController {
         return "register";
     }
 
-    @PostMapping({"registerUser"})
-    public String registerUser(@RequestParam(name = "email")String email, @RequestParam(name = "password")String password, @RequestParam(name = "first_name")String first_name, @RequestParam(name = "last_name")String last_name, @RequestParam(name = "company_id")Integer company_id){
+    @PostMapping({"/registerUser"})
+    public String registerUser(@RequestParam(name = "email")String email,
+                               @RequestParam(name = "password")String password,
+                               @RequestParam(name = "first_name")String first_name,
+                               @RequestParam(name = "last_name")String last_name,
+                               @RequestParam(name = "company_id")Integer company_id){
         //Adds user to auth_group and user tables
 
         userService.addUser(company_id,email,password,first_name,last_name);

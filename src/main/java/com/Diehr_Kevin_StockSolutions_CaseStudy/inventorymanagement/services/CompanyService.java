@@ -7,6 +7,7 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
@@ -27,6 +28,12 @@ public class CompanyService {
         Company setCompany = company.get();
 
         return setCompany.getId();
+
+    }
+    //finds all companies, used for user registration display
+    public List<Company> findCompanies(){
+        List<Company> companyList = companyRepoI.findAll();
+        return companyList;
 
     }
 }

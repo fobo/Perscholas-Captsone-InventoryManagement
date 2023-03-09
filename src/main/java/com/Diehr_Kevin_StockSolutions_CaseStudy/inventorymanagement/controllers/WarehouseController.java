@@ -68,7 +68,9 @@ public class WarehouseController {
     }
 
     @PostMapping("/warehousesAddRemove")
-    public String handleFormSubmission(@RequestParam(name = "id") Integer id, Model model, Principal principal){
+    public String handleFormSubmission(@RequestParam(name = "id") Integer id,
+                                       Model model,
+                                       Principal principal){
         log.info(principal.getName());
         List<Warehouse> warehouseList = warehouseRepoI.findByCompanyId(id);
         model.addAttribute("warehouses", warehouseList);
@@ -76,14 +78,19 @@ public class WarehouseController {
     }
 
     @PostMapping("/updateWarehouse")
-    public String updateWarehouse(@RequestParam(name = "city") String city, @RequestParam(name = "id") Integer id, Model model){
+    public String updateWarehouse(@RequestParam(name = "city") String city,
+                                  @RequestParam(name = "id") Integer id,
+                                  Model model){
         System.out.println(city);
         List<Warehouse> warehouseList = warehouseRepoI.findAll();
         model.addAttribute("warehouses", warehouseList);
         return "warehousesAddRemove";
     }
     @PostMapping("/updateWarehouseCity")
-    public String updateWarehouseCity(@RequestParam(name = "city") String city, @RequestParam(name="id") Integer id, @RequestParam(name="company_id") Integer company_id, Model model){
+    public String updateWarehouseCity(@RequestParam(name = "city") String city,
+                                      @RequestParam(name="id") Integer id,
+                                      @RequestParam(name="company_id") Integer company_id,
+                                      Model model){
         warehouseService.updateWarehouse(id, city);
 
         //Returns updated list
@@ -101,7 +108,8 @@ public class WarehouseController {
 //    }
 
     @PostMapping("/addWarehouse")
-    public String addWarehouse(@RequestParam(name = "city") String city, @RequestParam(name="company_id") Integer id){
+    public String addWarehouse(@RequestParam(name = "city") String city,
+                               @RequestParam(name="company_id") Integer id){
         //request name of city and company_id from front end
         //get company object from query
         // create new object using params city, company

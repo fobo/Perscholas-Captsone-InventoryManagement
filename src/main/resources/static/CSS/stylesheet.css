@@ -58,3 +58,7 @@ thead th{
 p, option, td, h4{
   font-family: Georgia, 'Times New Roman', Times, serif;
 }
+
+body{
+margin-bottom:56px;
+}

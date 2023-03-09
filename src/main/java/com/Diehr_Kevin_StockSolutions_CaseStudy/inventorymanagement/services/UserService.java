@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.swing.text.html.Option;
+import java.util.List;
 import java.util.Optional;
 
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
@@ -47,6 +48,26 @@ public class UserService {
         log.warn("Adding user to Auth Group");
 
     }
+
+    public void updateUser(Integer id, String email, String firstName, String lastName){
+        Optional<User> user = userRepoI.findById(id);
+        User setUser = user.get();
+        setUser.setEmail(email);
+        setUser.setFirst_name(firstName);
+        setUser.setLast_name(lastName);
+        userRepoI.saveAndFlush(setUser);
+
+    }
+
+    public void deleteUser(Integer id){
+        userRepoI.deleteById(id);
+    }
+
+    public List<User> getUsers(){
+        List<User> userList = userRepoI.findAll();
+        return userList;
+    }
+
 
     public Integer findId(String email){
         Optional<User> user = userRepoI.findByEmail(email);

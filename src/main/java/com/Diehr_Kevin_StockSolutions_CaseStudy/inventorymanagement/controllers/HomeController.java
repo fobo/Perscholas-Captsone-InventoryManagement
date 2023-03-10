@@ -8,6 +8,7 @@ import com.Diehr_Kevin_StockSolutions_CaseStudy.inventorymanagement.models.User;
 import com.Diehr_Kevin_StockSolutions_CaseStudy.inventorymanagement.services.CompanyService;
 import com.Diehr_Kevin_StockSolutions_CaseStudy.inventorymanagement.services.UserService;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.ui.Model;
 import com.Diehr_Kevin_StockSolutions_CaseStudy.inventorymanagement.dao.UserRepoI;
 import lombok.extern.slf4j.Slf4j;
@@ -15,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -68,14 +70,21 @@ public class HomeController {
 
         return "login";
     }
-    @GetMapping({"/login/processing"})
-    public String redirect(){
+//    @GetMapping({"/login/processing"})
+//    public String redirect(){
+//
+//        return "warehousesAddRemove";
+//    }
 
-        return "warehousesAddRemove";
+
+    @GetMapping(value = {"/", "index"})
+    public String homePage(Principal principal){
+    //TODO Add some welcome message for login
+
+        log.info("i am in the index controller method");
+
+        return "index";
     }
-
-
-
 
 
 

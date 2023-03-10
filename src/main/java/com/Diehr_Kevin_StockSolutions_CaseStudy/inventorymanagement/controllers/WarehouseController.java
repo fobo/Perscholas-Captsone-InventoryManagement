@@ -45,13 +45,6 @@ public class WarehouseController {
 
     @GetMapping("/warehousesAddRemove")
     public String warehousesAddRemove(Model model,Principal principal){
-
-        /*
-        Get email from principal
-        get user id from email match
-        get company id from user id match (get company id from email match?)
-        get list of companies from company id match
-         */
         String email = principal.getName();
 
         Integer userId = userService.findId(email);

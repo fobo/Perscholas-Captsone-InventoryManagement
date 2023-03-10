@@ -12,6 +12,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
 
 @Configuration
 @EnableWebSecurity
@@ -40,16 +42,24 @@ public class MySecurityConfig {
             Exception {
 
         http.csrf().disable()
-                .authorizeRequests()
-                .requestMatchers("/","index","css/**","javascript/**").permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .formLogin()
-                .loginPage("/login")
-                .usernameParameter("email")
-                .passwordParameter("password")
-                .loginProcessingUrl("/login/processing")
-                .failureUrl("/login?error").permitAll();
+                .authorizeHttpRequests((requests) -> requests
+                        .requestMatchers("/","/login","css/**","javascript/**","/index").permitAll()
+                        .anyRequest().authenticated()
+                )
+                .formLogin((form) ->form
+                        .loginPage("/login")
+                        .usernameParameter("email")
+                        .passwordParameter("password")
+                        .loginProcessingUrl("/login/processing")
+                        .defaultSuccessUrl("/")
+                        .failureUrl("/login?error")
+                        .permitAll()
+                )
+                .logout((logout) -> logout.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/")
+                .invalidateHttpSession(true)
+                .deleteCookies("JSESSIONID")
+                .clearAuthentication(true)
+                .permitAll()).exceptionHandling().accessDeniedPage("/403");
 
         return http.build();
     };

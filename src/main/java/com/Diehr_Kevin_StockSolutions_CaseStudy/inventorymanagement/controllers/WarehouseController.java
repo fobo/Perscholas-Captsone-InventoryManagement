@@ -22,6 +22,7 @@ import java.util.Optional;
 
 @Slf4j
 @Controller
+@SessionAttributes(value = {"msg"})
 public class WarehouseController {
     private final UserRepoI userRepoI;
 
@@ -46,17 +47,19 @@ public class WarehouseController {
     @GetMapping("/warehousesAddRemove")
     public String warehousesAddRemove(Model model,Principal principal){
         String email = principal.getName();
-
+        model.addAttribute("msg", email);
         Integer userId = userService.findId(email);
         Integer companyId = companyService.findId(userId);
         List<Warehouse> warehouseList = warehouseService.getWarehouses(companyId);
+
         model.addAttribute("warehouses", warehouseList);
         return "warehousesAddRemove";
     }
 
     @GetMapping("addWarehouseForm")
-    public String addWarehouse(){
-
+    public String addWarehouse(Model model, Principal principal){
+        String email = principal.getName();
+        model.addAttribute("msg", email);
         return "addWarehouseForm";
     }
 
@@ -64,6 +67,8 @@ public class WarehouseController {
     public String handleFormSubmission(@RequestParam(name = "id") Integer id,
                                        Model model,
                                        Principal principal){
+        String email = principal.getName();
+        model.addAttribute("msg", email);
         log.info(principal.getName());
         List<Warehouse> warehouseList = warehouseRepoI.findByCompanyId(id);
         model.addAttribute("warehouses", warehouseList);
@@ -73,7 +78,10 @@ public class WarehouseController {
     @PostMapping("/updateWarehouse")
     public String updateWarehouse(@RequestParam(name = "city") String city,
                                   @RequestParam(name = "id") Integer id,
-                                  Model model){
+                                  Model model,
+                                  Principal principal){
+        String email = principal.getName();
+        model.addAttribute("msg", email);
         System.out.println(city);
         List<Warehouse> warehouseList = warehouseRepoI.findAll();
         model.addAttribute("warehouses", warehouseList);
@@ -83,9 +91,11 @@ public class WarehouseController {
     public String updateWarehouseCity(@RequestParam(name = "city") String city,
                                       @RequestParam(name="id") Integer id,
                                       @RequestParam(name="company_id") Integer company_id,
-                                      Model model){
+                                      Model model,
+                                      Principal principal){
         warehouseService.updateWarehouse(id, city);
-
+        String email = principal.getName();
+        model.addAttribute("msg", email);
         //Returns updated list
         //This portion is supposed to update the list.
         //New method: Send company_id to front end to pull so the update returns the right list.
@@ -102,13 +112,16 @@ public class WarehouseController {
 
     @PostMapping("/addWarehouse")
     public String addWarehouse(@RequestParam(name = "city") String city,
-                               @RequestParam(name="company_id") Integer id){
+                               @RequestParam(name="company_id") Integer id,
+                               Model model,
+                               Principal principal){
         //request name of city and company_id from front end
         //get company object from query
         // create new object using params city, company
         log.warn(city + " " + id);
         warehouseService.addWarehouse(id, city);
-
+        String email = principal.getName();
+        model.addAttribute("msg", email);
 
         return "warehousesAddRemove";
     }

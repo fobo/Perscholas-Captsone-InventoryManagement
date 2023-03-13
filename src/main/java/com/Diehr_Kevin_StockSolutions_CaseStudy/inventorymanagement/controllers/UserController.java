@@ -11,11 +11,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
+import java.security.Principal;
 import java.util.List;
 
 @Controller
 @Slf4j
+@SessionAttributes(value = {"msg"})
 public class UserController {
 //    This controller controls anything to do with the user.
 //    User login, User Creation, User Deletion, and User Editing
@@ -42,7 +45,9 @@ public class UserController {
     }
 
     @GetMapping({"/usersUpdateRemove"})
-    public String usersUpdateRemove(Model model){
+    public String usersUpdateRemove(Model model, Principal principal){
+        String email = principal.getName();
+        model.addAttribute("msg", email);
         List<User> userList = userService.getUsers();
         model.addAttribute("users", userList);
         return "usersUpdateRemove";
@@ -66,8 +71,10 @@ public class UserController {
                              @RequestParam(name = "email")String email,
                              @RequestParam(name = "first_name")String first_name,
                              @RequestParam(name = "last_name")String last_name,
-                             Model model){
-
+                             Model model,
+                             Principal principal){
+        String emailDisplay = principal.getName();// Method parameters users default email variable name
+        model.addAttribute("msg", emailDisplay);
         userService.updateUser(id, email,first_name,last_name);
         List<User> userList = userService.getUsers();
         model.addAttribute("users", userList);
@@ -75,7 +82,9 @@ public class UserController {
     }
 
     @PostMapping("/deleteUser")
-    public String deleteUser(@RequestParam(name = "id")Integer id, Model model){
+    public String deleteUser(@RequestParam(name = "id")Integer id, Model model, Principal principal){
+        String email = principal.getName();
+        model.addAttribute("msg", email);
         userService.deleteUser(id);
         List<User> userList = userService.getUsers();
         model.addAttribute("users", userList);

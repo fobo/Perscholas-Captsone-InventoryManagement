@@ -31,6 +31,10 @@
         <li class="nav-item">
           <a class="nav-link" th:href="@{/usersUpdateRemove}">Admin </a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{/logout}">Logout </a>
+        </li>
+        <li class="nav-item"><span class="nav-link" th:text="${session.msg}"></span></li>
       </ul>
     </div>
   </nav>

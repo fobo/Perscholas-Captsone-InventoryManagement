@@ -15,12 +15,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import java.security.Principal;
 import java.util.List;
 
 @Slf4j
 @Controller
+@SessionAttributes(value = {"msg"})
 public class ProductController {
 
     WarehouseRepoI warehouseRepoI;
@@ -39,8 +41,9 @@ public class ProductController {
     }
 
     @PostMapping("/productsAddRemove")
-    public String handleFormSubmission(@RequestParam(name = "id") Integer id, Model model){
-
+    public String handleFormSubmission(@RequestParam(name = "id") Integer id, Model model,Principal principal){
+        String email = principal.getName();
+        model.addAttribute("msg", email);
         List<Product> productList = productRepoI.findByCompanyId(id);
         model.addAttribute("products", productList);
         return "productsAddRemove";
@@ -49,6 +52,7 @@ public class ProductController {
     @GetMapping("/productsAddRemove")
     public String productsAddRemove(Model model, Principal principal){
         String email = principal.getName();
+        model.addAttribute("msg", email);
         Integer userId = userService.findId(email);
         Integer companyId = companyService.findId(userId);
         List<Product> productList = productService.getProducts(companyId);
@@ -66,6 +70,7 @@ public class ProductController {
                                 Model model){
         productService.updateProduct(id, productName, productDescription, quantity);
         String email = principal.getName();
+        model.addAttribute("msg", email);
         Integer userId = userService.findId(email);
         Integer companyId = companyService.findId(userId);
         List<Product> productList = productService.getProducts(companyId);
@@ -77,6 +82,7 @@ public class ProductController {
     public String deleteProduct(@RequestParam(name = "id") Integer id, Model model, Principal principal){
         productService.deleteProduct(id);
         String email = principal.getName();
+        model.addAttribute("msg", email);
         Integer userId = userService.findId(email);
         Integer companyId = companyService.findId(userId);
         List<Product> productList = productService.getProducts(companyId);
@@ -85,8 +91,10 @@ public class ProductController {
     }
 
     @GetMapping("/addProductForm")
-    public String addProductForm(){
-
+    public String addProductForm(Model model,
+                                 Principal principal){
+        String email = principal.getName();
+        model.addAttribute("msg", email);
         return "addProductForm";
     }
 
@@ -95,6 +103,7 @@ public class ProductController {
        log.warn("ENTERING ADD PRODUCT");
 
         String email = principal.getName();
+        model.addAttribute("msg", email);
        Integer userId = userService.findId(email);
         productService.addProduct(userId, warehouse_id, productName, productDescription, quantity);
         Integer companyId = companyService.findId(userId);

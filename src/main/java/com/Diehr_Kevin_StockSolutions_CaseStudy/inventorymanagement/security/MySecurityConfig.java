@@ -43,7 +43,8 @@ public class MySecurityConfig {
 
         http.csrf().disable()
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/","/login","css/**","javascript/**","/index").permitAll()
+                        .requestMatchers("/","/login","css/**","javascript/**","/index","/register").permitAll()
+                        .requestMatchers("/updateUser", "/deleteUser","/usersUpdateRemove").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .formLogin((form) ->form
@@ -51,7 +52,7 @@ public class MySecurityConfig {
                         .usernameParameter("email")
                         .passwordParameter("password")
                         .loginProcessingUrl("/login/processing")
-                        .defaultSuccessUrl("/")
+                        .defaultSuccessUrl("/warehousesAddRemove")
                         .failureUrl("/login?error")
                         .permitAll()
                 )

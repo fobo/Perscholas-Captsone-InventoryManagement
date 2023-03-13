@@ -83,7 +83,7 @@ public class HomeController {
 
         log.info("i am in the index controller method");
 
-        return "index";
+        return "login";
     }
 
 

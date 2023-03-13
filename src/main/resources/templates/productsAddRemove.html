@@ -34,11 +34,11 @@
   </head>
   <body>
     <div th:replace="~{fragments/fragment.html :: nav}"></div>
-    <form method="post" action="/productsAddRemove">
+    <!-- <form method="post" action="/productsAddRemove">
       <label for="id">Company ID:</label>
       <input type="text" name="id" id="id" required />
       <button type="submit">Submit</button>
-    </form>
+    </form> -->
     <div class="container-fluid">
       <div class="row">
         <div class="col-12 col-md-8">
@@ -54,6 +54,7 @@
                 <th>Company</th>
                 <th>Update</th>
                 <th>Delete</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
@@ -66,20 +67,22 @@
                   <td th:text="${p.warehouse.id}" />
                   <td th:text="${p.warehouse.city}" />
                   <td th:text="${p.company.companyName}" />
-                  <td>
-                    <button onClick="myfunction(this.data-value)" th:data-value="${p.id}" class="btn btn-info">Update</button>
-                  </td>
+                  <td><button onClick="myfunction(this.data-value)" th:data-value="${p.id}" class="btn btn-info">Update</button></td>
                   <form action="/deleteProduct" method="post" th:id="'formDelete' + ${p.id}"></form>
-                  <td><input type="hidden" name="id" id="id" th:value="${p.id}" th:form="'formDelete' + ${p.id}" class="form-control"></td>
                   <td><button type="submit" th:form="'formDelete' + ${p.id}" class="btn btn-danger deleteProduct">Delete</button></td>
+                  <td><input type="hidden" name="id" id="id" th:value="${p.id}" th:form="'formDelete' + ${p.id}" class="form-control"></td>
                 </tr>
                 <tr hidden th:id="${p.id}">
                     <form action="/updateProduct" method="post" th:id="'form' + ${p.id}">
-                        <td><input type="text" name="id" id="id" th:value="${p.id}" th:form="'form' + ${p.id}" class="form-control"></td>
+                        <td><input type="hidden" name="id" id="id" th:value="${p.id}" th:form="'form' + ${p.id}" class="form-control"></td>
                         <td><input type="text" name="productName" id="productName" th:value="${p.productName}" th:form="'form' + ${p.id}" class="form-control"></td>
                         <td><input type="text" name="productDescription" id="productDescription" th:value="${p.productDescription}" th:form="'form' + ${p.id}" class="form-control"></td>
                         <td><input type="text" name="quantity" id="quantity" th:value="${p.quantity}" th:form="'form' + ${p.id}" class="form-control"></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
                         <td><button class="btn btn-warning saveAction" type="submit" th:form="'form' + ${p.id}">Save</button></td>
+                        <td></td>
                     </form>
                 </tr>
               </th:block>

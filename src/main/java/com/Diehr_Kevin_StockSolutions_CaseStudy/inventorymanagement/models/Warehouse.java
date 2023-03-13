@@ -1,6 +1,7 @@
 package com.Diehr_Kevin_StockSolutions_CaseStudy.inventorymanagement.models;
 
 import jakarta.persistence.*;
+import lombok.ToString;
 
 import java.util.Objects;
 
@@ -24,9 +25,13 @@ public class Warehouse {
         this.company = company;
     }
 
+    public Warehouse(Integer id, String city, Company company) {
+        this.id = id;
+        this.city = city;
+        this.company = company;
+    }
 
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "company_id", nullable = false)
     private Company company;
 
@@ -53,6 +58,7 @@ public class Warehouse {
     public void setCompany(Company company) {
         this.company = company;
     }
+
 
     @Override
     public boolean equals(Object o) {

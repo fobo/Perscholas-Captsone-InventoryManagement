@@ -2,6 +2,8 @@ package com.Diehr_Kevin_StockSolutions_CaseStudy.inventorymanagement.models;
 
 import jakarta.persistence.*;
 
+import java.util.Objects;
+
 @Entity
 @Table(name = "company")
 public class Company {
@@ -47,5 +49,17 @@ public class Company {
                 ", companyName='" + companyName + '\'' +
                 ", city='" + city + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Company company)) return false;
+        return Objects.equals(id, company.id) && Objects.equals(companyName, company.companyName) && Objects.equals(city, company.city);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, companyName, city);
     }
 }

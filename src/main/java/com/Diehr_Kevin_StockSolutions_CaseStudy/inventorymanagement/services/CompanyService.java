@@ -24,16 +24,23 @@ public class CompanyService {
 
     public Integer findId(Integer userId){
 
-        Optional<Company> company = companyRepoI.findById(userId);
-        Company setCompany = company.get();
+//        Optional<Company> company = companyRepoI.findById(userId);
+//        Company setCompany = company.get();
 
-        return setCompany.getId();
+        return companyRepoI.findById(userId).get().getId();
 
     }
     //finds all companies, used for user registration display
     public List<Company> findCompanies(){
-        List<Company> companyList = companyRepoI.findAll();
-        return companyList;
+        //List<Company> companyList = companyRepoI.findAll();
+        return companyRepoI.findAll();
 
+    }
+
+    public Company findById(Integer id){
+
+//        Optional<Company> company = companyRepoI.findById(id);
+//        Company setCompany = company.get();
+        return companyRepoI.findById(id).get();
     }
 }

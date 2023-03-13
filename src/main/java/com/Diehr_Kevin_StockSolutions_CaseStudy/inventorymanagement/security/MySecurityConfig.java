@@ -44,7 +44,7 @@ public class MySecurityConfig {
         http.csrf().disable()
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/","/login","css/**","javascript/**","/index","/register").permitAll()
-                        .requestMatchers("/updateUser", "/deleteUser","/usersUpdateRemove").hasRole("ADMIN")
+                        .requestMatchers("/updateUser", "/deleteUser","/usersUpdateRemove").hasAuthority("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .formLogin((form) ->form

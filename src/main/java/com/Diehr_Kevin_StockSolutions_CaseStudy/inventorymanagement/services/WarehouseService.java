@@ -48,9 +48,9 @@ public class WarehouseService {
 
     //Used for warehouse update and remove, and for product designation redesign
     public List<Warehouse> getWarehouses(Integer companyId){
-        List<Warehouse> warehouseList = warehouseRepoI.findByCompanyId(companyId);
+//        List<Warehouse> warehouseList = warehouseRepoI.findByCompanyId(companyId);
 
-        return warehouseList;
+        return warehouseRepoI.findByCompanyId(companyId);
 
     }
 }

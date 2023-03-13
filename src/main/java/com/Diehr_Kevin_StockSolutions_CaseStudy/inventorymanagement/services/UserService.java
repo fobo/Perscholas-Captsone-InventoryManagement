@@ -64,16 +64,16 @@ public class UserService {
     }
 
     public List<User> getUsers(){
-        List<User> userList = userRepoI.findAll();
-        return userList;
+//        List<User> userList = userRepoI.findAll();
+        return userRepoI.findAll();
     }
 
 
     public Integer findId(String email){
-        Optional<User> user = userRepoI.findByEmail(email);
-        User setUser = user.get();
+//        Optional<User> user = userRepoI.findByEmail(email);
+//        User setUser = user.get();
 
-        return setUser.getId();
+        return userRepoI.findByEmail(email).get().getId();
 
     }
 

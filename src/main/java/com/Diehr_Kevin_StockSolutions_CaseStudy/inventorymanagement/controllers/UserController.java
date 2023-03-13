@@ -44,14 +44,7 @@ public class UserController {
         return "register";
     }
 
-    @GetMapping({"/usersUpdateRemove"})
-    public String usersUpdateRemove(Model model, Principal principal){
-        String email = principal.getName();
-        model.addAttribute("msg", email);
-        List<User> userList = userService.getUsers();
-        model.addAttribute("users", userList);
-        return "usersUpdateRemove";
-    }
+
     @PostMapping({"/registerUser"})
     public String registerUser(@RequestParam(name = "email")String email,
                                @RequestParam(name = "password")String password,
@@ -65,7 +58,14 @@ public class UserController {
         //TODO Add feature to confirm register instead of redirect to login page
         return "login";
     }
-
+    @GetMapping({"/usersUpdateRemove"})
+    public String usersUpdateRemove(Model model, Principal principal){
+        String email = principal.getName();
+        model.addAttribute("msg", email);
+        List<User> userList = userService.getUsers();
+        model.addAttribute("users", userList);
+        return "usersUpdateRemove";
+    }
     @PostMapping({"/updateUser"})
     public String updateUser(@RequestParam(name = "id")Integer id,
                              @RequestParam(name = "email")String email,

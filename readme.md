@@ -8,7 +8,7 @@ This is a simple Spring Boot application that manages warehouses, products, and 
 -Viewing, adding and updating information for warehouses, products, and users
 
 ##Technologies Used
--Spring Boot
+*Spring Boot
 -MySQL
 -Spring Security
 -Thymeleaf

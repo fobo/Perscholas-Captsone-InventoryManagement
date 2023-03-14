@@ -4,6 +4,7 @@ import com.Diehr_Kevin_StockSolutions_CaseStudy.inventorymanagement.dao.CompanyR
 import com.Diehr_Kevin_StockSolutions_CaseStudy.inventorymanagement.dao.ProductRepoI;
 import com.Diehr_Kevin_StockSolutions_CaseStudy.inventorymanagement.dao.UserRepoI;
 import com.Diehr_Kevin_StockSolutions_CaseStudy.inventorymanagement.dao.WarehouseRepoI;
+import com.Diehr_Kevin_StockSolutions_CaseStudy.inventorymanagement.models.Company;
 import com.Diehr_Kevin_StockSolutions_CaseStudy.inventorymanagement.models.Product;
 import com.Diehr_Kevin_StockSolutions_CaseStudy.inventorymanagement.models.User;
 import com.Diehr_Kevin_StockSolutions_CaseStudy.inventorymanagement.models.Warehouse;
@@ -105,5 +106,15 @@ class InventorymanagementApplicationTests {
 
 		//assertTrue(expected.size() == actual.size());
 		assertEquals(expected,actual);
+	}
+
+	@Test
+	public void getCompany(){
+
+		Company expected = new Company(1, "Bamazon", "Beattle");
+
+		Company actual = companyService.findById(1);
+
+		assertEquals(expected, actual);
 	}
 }

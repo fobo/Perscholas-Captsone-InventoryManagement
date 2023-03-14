@@ -62,4 +62,14 @@ public class Company {
     public int hashCode() {
         return Objects.hash(id, companyName, city);
     }
+
+    public Company(Integer id, String companyName, String city) {
+        this.id = id;
+        this.companyName = companyName;
+        this.city = city;
+    }
+
+    public Company() {
+        //default constructor
+    }
 }

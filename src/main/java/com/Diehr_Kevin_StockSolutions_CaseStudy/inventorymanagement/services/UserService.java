@@ -78,5 +78,10 @@ public class UserService {
 
     }
 
+    public User findUser(Integer id){
+        //returns single user for unit testing
+        return userRepoI.findById(id).get();
+    }
+
 
 }

@@ -53,4 +53,8 @@ public class WarehouseService {
         return warehouseRepoI.findByCompanyId(companyId);
 
     }
+
+    public Warehouse getWarehouse(Integer companyId){
+        return warehouseRepoI.findById(companyId).get();
+    }
 }

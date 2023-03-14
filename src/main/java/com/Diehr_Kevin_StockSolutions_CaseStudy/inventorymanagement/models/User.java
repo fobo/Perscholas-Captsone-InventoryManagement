@@ -3,6 +3,8 @@ package com.Diehr_Kevin_StockSolutions_CaseStudy.inventorymanagement.models;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -21,6 +23,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
+
     @Column(name = "email", nullable = false, length = 100)
     private String email;
     @Column(name = "password", nullable = false, length = 100)

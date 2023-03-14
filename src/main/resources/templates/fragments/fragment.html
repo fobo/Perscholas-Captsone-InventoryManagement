@@ -28,9 +28,11 @@
           </div>
 
         </li>
+        <div sec:authorize="hasAuthority('ADMIN')">
         <li class="nav-item">
           <a class="nav-link" th:href="@{/usersUpdateRemove}">Admin </a>
         </li>
+        </div>
         <li class="nav-item">
           <a class="nav-link" th:href="@{/logout}">Logout </a>
         </li>

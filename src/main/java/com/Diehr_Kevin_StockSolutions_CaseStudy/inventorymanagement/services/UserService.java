@@ -52,6 +52,7 @@ public class UserService {
     public void updateUser(Integer id, String email, String firstName, String lastName){
         Optional<User> user = userRepoI.findById(id);
         User setUser = user.get();
+        log.warn("ASdding user");
         setUser.setEmail(email);
         setUser.setFirst_name(firstName);
         setUser.setLast_name(lastName);

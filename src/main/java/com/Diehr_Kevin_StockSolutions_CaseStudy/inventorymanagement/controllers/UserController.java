@@ -52,7 +52,7 @@ public class UserController {
                                @RequestParam(name = "last_name")String last_name,
                                @RequestParam(name = "company_id")Integer company_id){
         //Adds user to auth_group and user tables
-
+        log.warn("Adding User");
         userService.addUser(company_id,email,password,first_name,last_name);
 
         //TODO Add feature to confirm register instead of redirect to login page
